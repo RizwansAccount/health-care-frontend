@@ -17,14 +17,21 @@ export const healthCareApi = createApi({
     }),
     tagTypes: [TAG_TYPES.appointment, TAG_TYPES.chat, TAG_TYPES.prescription, TAG_TYPES.timeslot, TAG_TYPES.user],
     endpoints: (builder) => ({
+        
         // users
         getAllUsers: builder.query({ query: () => 'user', providesTags: () => [TAG_TYPES.user] }),
-        login: builder.mutation({ query: (data) => ({ url: 'user/login', method : 'POST', body: data }) })
+        getUser: builder.query({ query: (id) => `user/${id}`, providesTags: () => [TAG_TYPES.user] }),
+        login: builder.mutation({ query: (data) => ({ url: 'user/login', method : 'POST', body: data }) }),
+
+        //chat
+        getRoom: builder.query({ query: ({sender_id, receiver_id}) => `chat/room?sender_id=${sender_id}&receiver_id=${receiver_id}`}),
     })
 });
 
 export const {
 
-    useGetAllUsersQuery, useLoginMutation
+    useGetAllUsersQuery, useGetUserQuery, 
+    useGetRoomQuery,
+    useLoginMutation
 
 } = healthCareApi;
