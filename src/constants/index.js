@@ -1,16 +1,29 @@
 const serverUrl = process.env.REACT_APP_SERVER_URL;
 
-export const config = {
-    serverUrl : serverUrl,
-    serverApiUrl : serverUrl + "api/",
+const config = {
+    serverUrl: serverUrl,
+    serverApiUrl: serverUrl + "api/",
 
-    userToken : "user-token"
 };
 
-export const getLocalStore =(key)=>{
+const KEYS = {
+    userToken: "user-token",
+    userId: "user-id"
+}
+
+const getLocalStore = (key) => {
     return localStorage.getItem(key);
 };
 
-export const setLocalStore =(key, data)=>{
+const setLocalStore = (key, data) => {
     localStorage.setItem(key, data);
+};
+
+const removeLocalStore = (key) => {
+    localStorage.removeItem(key);
+};
+
+export {
+    config, KEYS,
+    getLocalStore, setLocalStore, removeLocalStore
 }

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { config, getLocalStore } from "../constants";
+import { config, getLocalStore, KEYS } from "../constants";
 
 const TAG_TYPES = { user: 'user', appointment: 'appointment', chat: 'chat', prescription: 'prescription', timeslot: 'timeslot' }
 
@@ -8,7 +8,7 @@ export const healthCareApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: config.serverApiUrl,
         prepareHeaders: async (headers, { getState, endpoint }) => {
-            const storedToken = getLocalStore(config.userToken);
+            const storedToken = getLocalStore(KEYS.userToken);
             if (storedToken && endpoint !== 'refresh') {
                 headers.set('Authorization', `Bearer ${storedToken}`);
             }

@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useLoginMutation } from '../redux/storeApis';
-import { config, setLocalStore } from '../constants';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../reactRoute/RouteConstants';
+import { KEYS, setLocalStore } from '../constants';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -13,7 +13,8 @@ const LoginPage = () => {
   const fnLogin = async () => {
     try {
       const result = await loginUser({ email: data?.email, password: data?.password }).unwrap();
-      setLocalStore(config.userToken, result?.data?.token);
+      setLocalStore(KEYS.userToken, result?.data?.token);
+      setLocalStore(KEYS.userId, result?.data?.user_id);
       setData({ email: '', password: '' });
       navigate(ROUTES.home);
     } catch (error) {
