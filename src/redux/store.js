@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import SnackbarReducer from './snackBarReducer';
+import SnackBarReducer from './snackBarReducer';
 
 export const store = configureStore({
-    reducer: { SnackbarReducer },
+    reducer: { SnackBarReducer },
 })
 
 setupListeners(store.dispatch);

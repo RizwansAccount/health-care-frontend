@@ -1,17 +1,33 @@
 import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
-import HomePage from '../pages/HomePage';
 import { ROUTES } from './RouteConstants';
+import HomePage from '../pages/HomePage';
 import ChatPage from '../pages/ChatPage';
+import LoginPage from '../pages/LoginPage';
+import RegisterPage from '../pages/RegisterPage';
+import ProtectedRoutes from './ProtectedRoutes';
 
 const ReactRoute = createBrowserRouter([
     {
-        path: `${ROUTES.home}`,
-        element: <HomePage />
+        path: `${ROUTES.login}`,
+        element: <LoginPage />
     },
     {
-        path: `${ROUTES.chat}`,
-        element: <ChatPage />
+        path: `${ROUTES.register}`,
+        element: <RegisterPage />
+    },
+    {
+        element: <ProtectedRoutes />,
+        children: [
+            {
+                path: `${ROUTES.home}`,
+                element: <HomePage />
+            },
+            {
+                path: `${ROUTES.chat}`,
+                element: <ChatPage /> 
+            }
+        ]
     }
 ]);
 
