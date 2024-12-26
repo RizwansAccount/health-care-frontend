@@ -16,3 +16,8 @@
   height: 100%;
   width: 100%;
 }
+
+:root {
+  --primary: #4A6DA7;
+  --lightgrey: #F5F5F5
+}

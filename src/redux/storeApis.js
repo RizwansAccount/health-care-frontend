@@ -22,6 +22,7 @@ export const healthCareApi = createApi({
         getAllUsers: builder.query({ query: () => 'user', providesTags: () => [TAG_TYPES.user] }),
         getUser: builder.query({ query: (id) => `user/${id}`, providesTags: () => [TAG_TYPES.user] }),
         login: builder.mutation({ query: (data) => ({ url: 'user/login', method : 'POST', body: data }) }),
+        register: builder.mutation({ query: (data) => ({ url: 'user/register', method : 'POST', body: data }) }),
 
         //chat
         getRoom: builder.query({ query: ({sender_id, receiver_id}) => `chat/room?sender_id=${sender_id}&receiver_id=${receiver_id}`}),
@@ -30,8 +31,7 @@ export const healthCareApi = createApi({
 
 export const {
 
-    useGetAllUsersQuery, useGetUserQuery, 
+    useGetAllUsersQuery, useGetUserQuery, useLoginMutation, useRegisterMutation,
     useGetRoomQuery,
-    useLoginMutation
 
 } = healthCareApi;
