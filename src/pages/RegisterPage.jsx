@@ -20,18 +20,27 @@ const RegisterPage = () => {
       email: e.target.email.value,
       password: e.target.password.value,
       role: e.target.role.value,
-      phone: e.target.phone.value,
-      address: e.target.address.value,
+      contact_details: {
+        phone: e.target.phone.value,
+        address: e.target.address.value,
+      }
     };
 
-    const checkValidation = Object.values(body)?.every(value => value);
+    const checkValidation = Object.values(body)?.every((value)=> {
+      if(typeof value === 'object' && value !== null) {
+        return Object.values(value)?.every(nestedValue => nestedValue);
+      }
+      return value;
+    });
 
     if (checkValidation) {
       try {
-        await registerUser(body).unwrap();
-        navigate(ROUTES.login);
+        const result = await registerUser(body).unwrap();
+        if(result?.status === 200) {
+          navigate(ROUTES.login);
+        }
       } catch (error) {
-        console.log('error', error);
+        console.log('error', error?.data?.message);
       }
     } else {
       alert('please must filled all fields');
